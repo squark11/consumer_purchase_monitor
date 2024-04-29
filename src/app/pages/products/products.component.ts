@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { HttpService } from 'src/app/services/http.service';
+
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Item } from 'src/app/models/item';
 import { FiltersProduct } from 'src/app/models/filtersProduct';
@@ -21,7 +21,7 @@ export class ProductsComponent {
   products: Item[];
   filters: FiltersProduct;
 
-  constructor(private http: HttpService, private authService: AuthenticationService, private productService:ProductsService) {
+  constructor(private http: ProductsService, private authService: AuthenticationService, private productService:ProductsService) {
     this.refreshPage();
   }
 
@@ -39,7 +39,7 @@ export class ProductsComponent {
       console.log(params);
 
     this.http.getProducts(params).subscribe(products => {
-      console.log(products);
+      console.log(this.authService.currentUserValue.token);
       this.collectionSize = products.totalItemsCount;
       this.products = products.items;
     });
