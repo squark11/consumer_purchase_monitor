@@ -1,0 +1,77 @@
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchPhrase"
+    (ngModelChange)="refreshPage()">
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">
+        Name
+        <button class="btn btn-link" (click)="sortBy('Name')">
+          <em class="fa text-info cursor"
+            [ngClass]="{'fa-sort': SortBy !== 'Name' , 'fa-sort-up': SortBy === 'Name' && SortDirection === 0, 'fa-sort-down': SortBy === 'Name' && SortDirection === 1}"></em>
+        </button>
+      </th>
+      <th scope="col">
+        Price
+        <button class="btn btn-link" (click)="sortBy('Price')">
+          <em class="fa text-info cursor"
+            [ngClass]="{'fa-sort': SortBy !== 'Price' , 'fa-sort-up': SortBy === 'Price' && SortDirection === 0, 'fa-sort-down': SortBy === 'Price' && SortDirection === 1}"></em>
+        </button>
+      </th>
+      <th scope="col">
+        Category
+        <button class="btn btn-link" (click)="sortBy('Description')">
+          <em class="fa text-info cursor"
+            [ngClass]="{'fa-sort': SortBy !== 'Description' , 'fa-sort-up': SortBy === 'Description' && SortDirection === 0, 'fa-sort-down': SortBy === 'Description' && SortDirection === 1}"></em>
+        </button>
+      </th>
+      <th scope="col">
+        Rate
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products; let i = index">
+      <th scope="row">{{ i+1 }}</th>
+
+      <td [routerLink]="['/product-cover', {id:product.id}]">{{product.name}}</td>
+
+      <td>{{ product.price| number }}</td>
+
+      <td>{{ product.category}}</td>
+
+      <td>
+        <ng-template #t let-fill="fill">
+          <span class="star" [class.full]="fill === 100">
+            <span class="half" [style.width.%]="fill"><em class="fa fa-star text-warning"></em></span><em
+              class="fa fa-star-o text-warning cursor"></em>
+          </span>
+        </ng-template>
+        <ngb-rating [max]="5" [(rate)]="product.averageRating" [readonly]="true" [starTemplate]="t">
+        </ngb-rating>
+        {{product.averageRating}}
+      </td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between align-items-center p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="Page" [pageSize]="PageSize" (pageChange)="refreshPage()">
+  </ngb-pagination>
+
+  <div class="d-flex align-items-center">
+    <div class="me-2">
+      <app-add-product (appAddProduct)="refreshPage"></app-add-product>
+    </div>
+
+    <select class="form-select me-2" style="width: auto" [(ngModel)]="PageSize" (ngModelChange)="Page=1; refreshPage()">
+      <option [ngValue]="5">5 items per page</option>
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="15">15 items per page</option>
+    </select>
+  </div>
+</div>
