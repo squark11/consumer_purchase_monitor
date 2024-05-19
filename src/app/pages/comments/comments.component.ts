@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CommentsResponse } from 'src/app/models/commentsResponse';
+import { CommentItem } from 'src/app/models/commentsItem';
+import { CommentsResponse } from 'src/app/models/response';
 import { CommentsService } from 'src/app/services/comments.service';
+import { LikesService } from 'src/app/services/likes.service';
 
 @Component({
   selector: 'app-comments',
@@ -9,14 +11,30 @@ import { CommentsService } from 'src/app/services/comments.service';
 })
 export class CommentsComponent {
   @Input() id:number;
-  comments:CommentsResponse[];
-  constructor(private commentsService:CommentsService){}
+  content: string;
+  comments:CommentItem[];
+  
+  liked:Boolean=false;
+
+  constructor(private commentsService:CommentsService, private likesService:LikesService){}
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+    this.getComments();
   }
 
   getComments(){
-    this.commentsService.getComments(this.id).subscribe(comments => this.comments=comments);
+    this.commentsService.getComments(this.id).subscribe(comments => this.comments=comments.items);
+  }
+
+  postComment(productId: number, content: string) {
+    this.commentsService.postComment(productId, content)
+      .subscribe(
+        response => {
+          console.log('Komentarz został dodany:', response);
+          this.getComments();
+        },
+        error => {
+          console.error('Wystąpił błąd podczas dodawania komentarza:', error);
+        }
+      );
   }
 }

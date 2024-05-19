@@ -1,0 +1,25 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-md-11 col-lg-9 col-xl-7">
+      <div class="d-flex flex-start mb-4">
+        <img class="rounded-circle shadow-1-strong me-3"
+          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65" height="65" />
+        <div class="card w-100">
+          <div class="card-body p-4">
+            <span>{{ comment.created | date: 'medium' }}</span>
+            <div class="">
+              <h5>{{ comment.userName }}</h5>
+              <p>{{ comment.content }}</p>
+  
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                  <em class="fa" [ngClass]="{'fa-heart': liked, 'fa-heart-o': !liked}" (click)="like(comment.id)"></em > {{ comment.likesCount }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-comment-replies *ngIf="comment.hasReplies" [parentid]="comment.id"></app-comment-replies>
+    </div>
+  </div>
+  

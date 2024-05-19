@@ -15,6 +15,8 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ProductCoverComponent } from './pages/products/product-cover/product-cover.component';
 import { AddProductComponent } from './pages/products/add-product/add-product.component';
 import { CommentsComponent } from './pages/comments/comments.component';
+import { CommentCoverComponent } from './pages/comments/comment-cover/comment-cover.component';
+import { CommentRepliesComponent } from './pages/comments/comment-replies/comment-replies.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { CommentsComponent } from './pages/comments/comments.component';
     RegisterComponent,
     AddProductComponent,
     CommentsComponent,
+    CommentCoverComponent,
+    CommentRepliesComponent,
   ],
   imports: [
     BrowserModule,

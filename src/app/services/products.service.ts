@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { Item } from '../models/item';
+import { ItemsResponse } from '../models/response';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,12 @@ import { Item } from '../models/item';
 export class ProductsService {
   url="https://localhost:44324/api/products";
   constructor(private httpClient: HttpClient, private auth:AuthenticationService) { }
+
+  getProducts(filters) {
+    return this.httpClient.get<ItemsResponse>("https://localhost:44324/api/products", {
+      params: filters
+    });
+  }
 
   addProduct(product:NewProduct): Observable<NewProduct> {
     return this.httpClient.post<NewProduct>(`${this.url}`, product, {
@@ -28,6 +35,13 @@ export class ProductsService {
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
       }
+    });
+  }
+  
+  updateProductReview(productId: number, reviewId: number, comment: string, rating: number): Observable<any> {
+    return this.httpClient.put<any>(`${this.url}${productId}/reviews/${reviewId}`, {
+      comment: comment,
+      rating: rating
     });
   }
 }
