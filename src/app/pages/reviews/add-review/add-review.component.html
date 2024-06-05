@@ -1,0 +1,13 @@
+<h2>Dodaj opinię</h2>
+<form (ngSubmit)="addReview()">
+  <div class="form-group">
+    <label for="comment">Komentarz:</label>
+    <textarea id="comment" class="form-control" [(ngModel)]="comment" name="comment" required></textarea>
+  </div>
+  <div class="form-group">
+    <label for="rating">Ocena:</label>
+    <input id="rating" type="number" class="form-control" [(ngModel)]="rating" name="rating" required>
+  </div>
+  <button type="submit" class="btn btn-success">Dodaj</button>
+  <button type="button" class="btn btn-secondary" (click)="goBack()">Anuluj</button>
+</form>

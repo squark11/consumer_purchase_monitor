@@ -1,0 +1,27 @@
+<section style="background-color: #eee;">
+  <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+    <ng-container *ngIf="!showReplyFormId; else replyForm">
+      <div class="d-flex justify-content-start align-items-center w-100 mb-3">
+        <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="40" height="40" />
+        <div data-mdb-input-init class="form-outline flex-grow-1">
+          <label class="form-label" for="textAreaExample">Comment</label>
+          <textarea class="form-control" [(ngModel)]="content" id="textAreaExample" rows="4" style="background: #fff;"></textarea>
+        </div>
+        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-sm ms-3" (click)="postComment(id, content)">Post comment</button>
+      </div>
+    </ng-container>
+
+    <ng-template #replyForm>
+      <div class="d-flex justify-content-start align-items-center w-100 mb-3">
+        <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="40" height="40" />
+        <div data-mdb-input-init class="form-outline flex-grow-1">
+          <label class="form-label" for="textAreaReply">Reply: </label>
+          <textarea class="form-control" [(ngModel)]="replyContent" id="textAreaReply" rows="4" style="background: #fff;"></textarea>
+        </div>
+        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-sm ms-3" (click)="postReply(id, showReplyFormId, replyContent)">Post reply</button>
+      </div>
+    </ng-template>
+  </div>
+
+  <app-comment-cover *ngFor="let comment of comments" [comment]="comment"  (likeClicked)="getComments()" (replyClicked)="toggleReplyForm(comment.id)"></app-comment-cover>
+</section>

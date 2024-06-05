@@ -1,0 +1,50 @@
+<div class="product-reviews-container">
+    <div *ngIf="reviews && reviews.length > 0; else noReviews">
+      <h2 class="product-reviews-title">Recenzje produktu</h2>
+      <ul class="list-group">
+        <li class="list-group-item product-review-item" *ngFor="let review of reviews">
+          
+          <div class="review-header"> 
+            <span class="username">{{ review.userName }}</span> - <span class="date">{{ review.created | date: 'dd/MM/yyyy' }}</span>
+            <div class="rating-stars">
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                      <span class="half" [style.width.%]="fill">
+                        <em class="fa fa-star text-warning"></em>
+                      </span>
+                      <em class="fa fa-star-o text-warning cursor"></em>
+                    </span>
+                  </ng-template>
+                  <ngb-rating [max]="5" [(rate)]="review.rating" [readonly]="true" [starTemplate]="t">
+                  </ngb-rating>
+            </div>
+          </div>
+          <div class="review-content">{{ review.comment }}</div>
+          <div class="review-actions" >
+            <button class="btn btn-primary btn-sm" 
+            [routerLink]="['/products', productId, 'reviews', review.id, 'update']" 
+            [queryParams]="{ comment: review.comment, rating: review.rating }"
+            >Edytuj</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteReview(review.id)">Usuń</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noReviews>
+      <p class="no-reviews-message">Brak recenzji dla tego produktu.</p>
+    </ng-template>
+    
+    <ng-template #starTemplate let-fill="fill">
+      <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">
+          <em class="fa fa-star text-warning"></em>
+        </span>
+        <em class="fa fa-star-o text-warning cursor"></em>
+      </span>
+    </ng-template>
+
+
+  </div>
+  
+  <a *ngIf="canAddReview" [routerLink]="['/products', productId, 'reviews', 'add']" class="btn btn-primary mt-3">Dodaj opinię</a>
+  

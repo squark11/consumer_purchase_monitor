@@ -1,0 +1,15 @@
+<div class="container mt-4">
+    <button class="btn btn-outline-secondary mb-3" (click)="cancel()">Anuluj</button>
+    <h2>Ustaw limit wydatków</h2>
+    <form [formGroup]="updateExpenseLimitForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="newLimit" class="form-label">Nowy limit wydatków miesięcznych</label>
+        <input type="number" class="form-control" id="newLimit" formControlName="newLimit" placeholder="Wpisz nowy limit wydatków">
+        <div *ngIf="updateExpenseLimitForm.get('newLimit').invalid && updateExpenseLimitForm.get('newLimit').touched" class="text-danger">
+          Limit wydatków jest wymagany.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Zapisz</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <button class="btn btn-outline-secondary mb-3" (click)="cancel()">Anuluj</button>
+    <h2>Dodaj zakupy</h2>
+    <form [formGroup]="addPurchaseForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="purchaseName" class="form-label">Nazwa zakupu</label>
+        <input type="text" class="form-control" id="purchaseName" formControlName="purchaseName" placeholder="Wpisz nazwę zakupu">
+        <div *ngIf="addPurchaseForm.get('purchaseName').invalid && addPurchaseForm.get('purchaseName').touched" class="text-danger">
+          Nazwa zakupu jest wymagana.
+        </div>
+      </div>
+      <div formArrayName="purchaseItems" *ngFor="let item of purchaseItems.controls; let i=index" class="mb-3">
+        <div [formGroupName]="i" class="card mb-2">
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="productName" class="form-label">Nazwa produktu</label>
+              <input type="text" class="form-control" id="productName" formControlName="productName" placeholder="Wpisz nazwę produktu">
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Cena</label>
+              <input type="number" class="form-control" id="price" formControlName="price" placeholder="Wpisz cenę">
+            </div>
+            <div class="mb-3">
+              <label for="quantity" class="form-label">Ilość</label>
+              <input type="number" class="form-control" id="quantity" formControlName="quantity" placeholder="Wpisz ilość">
+            </div>
+            <button class="btn btn-outline-danger" (click)="removeItem(i)">Usuń przedmiot</button>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-outline-primary" (click)="addItem()">Dodaj przedmiot</button>
+      <button type="submit" class="btn btn-primary mt-3">Zapisz zakupy</button>
+    </form>
+  </div>
+  

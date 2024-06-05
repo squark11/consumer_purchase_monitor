@@ -1,0 +1,9 @@
+<div class="mb-3">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Product Name" [(ngModel)]="item.productName" name="productName">
+      <input type="number" class="form-control" placeholder="Price" [(ngModel)]="item.price" name="price">
+      <input type="number" class="form-control" placeholder="Quantity" [(ngModel)]="item.quantity" name="quantity">
+      <button class="btn btn-outline-success" (click)="addItem()">Add Item</button>
+    </div>
+  </div>
+  

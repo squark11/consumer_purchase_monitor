@@ -1,0 +1,23 @@
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 1.3rem;
+  }
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .text-warning {
+    color: #ff902b !important;
+  }
+
+  .nav-tabs .nav-item.active .nav-link {
+    background-color: #808080; 
+    color: #fff; 
+    cursor: default; 
+  }
+  
+  .nav-tabs .nav-item .nav-link {
+    cursor: pointer; 
+  }
