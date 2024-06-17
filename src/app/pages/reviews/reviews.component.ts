@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { reviewItem } from 'src/app/models/review.models';
+import { reviewItem } from 'src/app/models/review-models';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ProductReviewsService } from 'src/app/services/product-reviews.service';
 

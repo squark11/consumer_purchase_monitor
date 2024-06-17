@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Item } from 'src/app/models/item';
-import { FiltersProduct } from 'src/app/models/filtersProduct';
+
 import { ProductsService } from 'src/app/services/products.service';
+import { FiltersProduct, ProductItem } from 'src/app/models/product-models';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +18,7 @@ export class ProductsComponent {
   SortBy='';
   SortDirection=1;
   searchPhrase: string;
-  products: Item[];
+  products: ProductItem[];
   filters: FiltersProduct;
 
   constructor(private http: ProductsService, private authService: AuthenticationService, private productService:ProductsService) {

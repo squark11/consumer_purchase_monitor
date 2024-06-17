@@ -20,6 +20,7 @@ export class CommentsService {
     });
   }
 
+
   postComment(productId: number, content: string): Observable<any> {
     return this.httpClient.post<any>(`${this.url}${productId}/comments`, {
       content: content
@@ -58,7 +59,7 @@ export class CommentsService {
     });
   }
 
-  getCommentReplies(productId: number, commentId: number): Observable<PaginatedComments> {
+   getCommentReplies(productId: number, commentId: number): Observable<PaginatedComments> {
     return this.httpClient.get<PaginatedComments>(`${this.url}${productId}/comments/${commentId}/replies`, {
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token

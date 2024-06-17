@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h2>Comment Reports</h2>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Comment ID</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Comment Content</th>
+        <th>Author</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td>{{ report.id }}</td>
+        <td>{{ report.commentId }}</td>
+        <td>{{ report.reason }}</td>
+        <td>{{ report.status }}</td>
+        <td>{{ report.createdAt }}</td>
+        <td>{{ report.commentInfo.content }}</td>
+        <td>{{ report.commentInfo.userName }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteReport(report.commentId)">Delete</button>
+          <button class="btn btn-primary btn-sm" [routerLink]="['/edit-report', 'comment', report.id]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div *ngIf="reports.length === 0" class="alert alert-info mt-3">
+    No comment reports found.
+  </div>
+</div>

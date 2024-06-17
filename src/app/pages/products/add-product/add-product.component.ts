@@ -1,7 +1,8 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Output, TemplateRef, inject } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NewProduct } from 'src/app/models/newProduct';
+import { ProductItem, ProductResponse } from 'src/app/models/product-models';
+
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -15,11 +16,11 @@ export class AddProductComponent {
 
 constructor(private productService:ProductsService){}
 
-  product:NewProduct = {
-    Name: '',
-    Description: '',
-    Price: '',
-    Category: ''
+  product:ProductItem = {
+    name: '',
+    description: '',
+    price: '',
+    category: ''
   };
 
   addProduct() {

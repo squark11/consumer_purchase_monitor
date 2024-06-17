@@ -2,36 +2,43 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 import { Observable } from 'rxjs';
-import { CommentReports } from '../models/comment-reports';
+import { ReportCommentResponse } from '../models/reports-models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentReportsService {
 
-  url = "https://localhost:44324/api/comment-reports/"
+  url = "https://localhost:44324/api/comment-reports"
+  
   constructor(private httpClient: HttpClient, private auth:AuthenticationService) { }
 
-  getCommentsReports(filters): Observable<CommentReports[]> {
-    return this.httpClient.get<CommentReports[]>(this.url + "pending-reports", {
-      params: filters
+  getCommentsReports(): Observable<ReportCommentResponse> {
+    return this.httpClient.get<ReportCommentResponse>(this.url + "/pending-reports",{
+      headers: {
+        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
+      }
     });
   }
 
-  postCommentReports(reason, params): Observable<any> {
-    return this.httpClient.post<any>(this.url + "report", {
-      reason: reason,
-      params: params
+  postCommentReports(productId: number, commentId: number, reason: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.url}/report/${commentId}`, {
+      productId: productId,
+      reason: reason
+    }, {
+      headers: {
+        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
+      }
     });
   }
 
-  putCommentReports(newStatus, id, params): Observable<any> {
-    return this.httpClient.put<any>(`${this.url}${id}/status`, {
-      params: params
-    }, newStatus);
-  }
 
-  deleteCommentReport(id): Observable<any> {
-    return this.httpClient.delete<any>(`${this.url}${id}`);
+  deleteCommentReport(id:number, productId:number): Observable<any> {
+    return this.httpClient.delete<any>(`${this.url}/${id}/remove`, {
+      headers: {
+        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
+      },
+      body: {productId}
+    });
   }
 }

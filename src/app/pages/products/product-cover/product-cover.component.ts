@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Item } from 'src/app/models/item';
+import { ProductItem } from 'src/app/models/product-models';
+
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./product-cover.component.css']
 })
 export class ProductCoverComponent {
-  product:Item;
+  product:ProductItem;
   constructor(private route:ActivatedRoute, private productService:ProductsService){}
   id:string;
 

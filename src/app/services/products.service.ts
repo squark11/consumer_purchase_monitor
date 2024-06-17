@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { NewProduct } from '../models/newProduct';
+
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-import { Item } from '../models/item';
-import { ItemsResponse } from '../models/response';
+import { ProductItem, ProductResponse } from '../models/product-models';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +14,20 @@ export class ProductsService {
   constructor(private httpClient: HttpClient, private auth:AuthenticationService) { }
 
   getProducts(filters) {
-    return this.httpClient.get<ItemsResponse>("https://localhost:44324/api/products", {
+    return this.httpClient.get<ProductResponse>("https://localhost:44324/api/products", {
       params: filters
     });
   }
 
-  addProduct(product:NewProduct): Observable<NewProduct> {
-    return this.httpClient.post<NewProduct>(`${this.url}`, product, {
+  addProduct(product:ProductItem): Observable<ProductItem> {
+    return this.httpClient.post<ProductItem>(`${this.url}`, product, {
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
       }
     });
   }
-  getProductByID(id:string):Observable<Item>{
-    return this.httpClient.get<Item>("https://localhost:44324/api/products/"+ id);
+  getProductByID(id:string):Observable<ProductItem>{
+    return this.httpClient.get<ProductItem>("https://localhost:44324/api/products/"+ id);
   }
 
   deleteProduct(id:number):Observable<{}>{

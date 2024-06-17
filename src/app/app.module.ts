@@ -25,6 +25,12 @@ import { PurchaseDetailComponent } from './pages/purchase/purchase-detail/purcha
 import { UpdateExpenseLimitComponent } from './pages/purchase/update-expense-limit/update-expense-limit.component';
 import { AddItemComponent } from './pages/purchase/add-item/add-item.component';
 import { AddPurchaseComponent } from './pages/purchase/add-purchase/add-purchase.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { CommentReportsComponent } from './pages/reports/comment-reports/comment-reports.component';
+import { ProductReportsComponent } from './pages/reports/product-reports/product-reports.component';
+import { ReviewReportsComponent } from './pages/reports/review-reports/review-reports.component';
+import { EditReportComponent } from './pages/reports/edit-report/edit-report.component';
+import { AddReportComponent } from './pages/reports/add-report/add-report.component';
 
 
 @NgModule({
@@ -46,6 +52,12 @@ import { AddPurchaseComponent } from './pages/purchase/add-purchase/add-purchase
     AddPurchaseComponent,
     UpdateExpenseLimitComponent,
     AddItemComponent,
+    ReportsComponent,
+    CommentReportsComponent,
+    ProductReportsComponent,
+    ReviewReportsComponent,
+    EditReportComponent,
+    AddReportComponent,
   ],
   imports: [
     BrowserModule,

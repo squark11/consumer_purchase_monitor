@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 import { Observable } from 'rxjs';
+import { ReportReviewResponse } from '../models/reports-models';
 
 @Injectable({
   providedIn: 'root'
@@ -20,21 +21,14 @@ export class ReviewReportsService {
     });
   }
 
-  getPendingReviewReports(): Observable<string> {
-    return this.httpClient.get<string>(`${this.url}pending-reports`, {
+  getReviewReports(): Observable<ReportReviewResponse> {
+    return this.httpClient.get<ReportReviewResponse>(`${this.url}pending-requests`,{
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
       }
     });
   }
 
-  updateReviewReportStatus(reportId: number, newStatus: string): Observable<any> {
-    return this.httpClient.put<any>(`${this.url}${reportId}/status`, { newStatus: newStatus },{
-      headers: {
-        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
-      }
-    });
-  }
 
   deleteReviewReport(reportId: number): Observable<any> {
     return this.httpClient.delete<any>(`${this.url}${reportId}/remove`,{

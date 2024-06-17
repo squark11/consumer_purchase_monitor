@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Comment } from 'src/app/models/comments.models';
 import { LikesService } from 'src/app/services/likes.service';
 import { CommentsService } from 'src/app/services/comments.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddReportComponent } from '../../reports/add-report/add-report.component';
 
 @Component({
   selector: 'app-comment-cover',
@@ -15,7 +17,12 @@ export class CommentCoverComponent {
   @Output() likeClicked = new EventEmitter<number>();
   @Output() replyClicked = new EventEmitter<number>();
   
-  constructor(private likesService: LikesService, private commentsService: CommentsService, private route: ActivatedRoute,){}
+  constructor(private likesService: LikesService,
+     private commentsService: CommentsService, 
+     private route: ActivatedRoute,
+     private router: Router,
+     private modalService: NgbModal
+    ){}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -65,5 +72,10 @@ export class CommentCoverComponent {
         }
       );
     }
+  }
+  report(commentId: number) {
+    const modalRef = this.modalService.open(AddReportComponent);
+    modalRef.componentInstance.productId = this.productId;
+    modalRef.componentInstance.commentId = commentId;
   }
 }

@@ -1,17 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="currentUser">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Consumer Purchase Monitor</a>
-
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/reports">Reports</a>
+        </li>
         <li class="nav-item dropdown" ngbDropdown>
           <a
             class="nav-link dropdown-toggle text-white"
-            href="#"
+            style="cursor: pointer;"
             id="userDropdown"
             ngbDropdownToggle
           >
-            Witaj, {{ this.authService.currentUserValue.email }}
+            Witaj, {{ authService.currentUserValue.email }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu aria-labelledby="userDropdown">
             <li><a class="dropdown-item" routerLink="/purchases">My Purchases</a></li>

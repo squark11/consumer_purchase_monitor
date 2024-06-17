@@ -13,6 +13,12 @@ import { PurchaseListComponent } from './pages/purchase/purchase-list/purchase-l
 import { PurchaseDetailComponent } from './pages/purchase/purchase-detail/purchase-detail.component';
 import { UpdateExpenseLimitComponent } from './pages/purchase/update-expense-limit/update-expense-limit.component';
 import { AddPurchaseComponent } from './pages/purchase/add-purchase/add-purchase.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { CommentReportsComponent } from './pages/reports/comment-reports/comment-reports.component';
+import { ProductReportsComponent } from './pages/reports/product-reports/product-reports.component';
+import { ReviewReportsComponent } from './pages/reports/review-reports/review-reports.component';
+import { EditReportComponent } from './pages/reports/edit-report/edit-report.component';
+import { AddReportComponent } from './pages/reports/add-report/add-report.component';
 
 const routes: Routes = [
   { path: '', component: ProductsComponent,  canActivate: [AuthGuard]},
@@ -27,6 +33,15 @@ const routes: Routes = [
   { path: 'purchases/:id', component: PurchaseDetailComponent, canActivate: [AuthGuard] },
   { path: 'add-purchase', component: AddPurchaseComponent, canActivate: [AuthGuard] },
   { path: 'update-expense-limit', component: UpdateExpenseLimitComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] ,children: [
+    { path: 'comment-reports', component: CommentReportsComponent },
+    { path: 'product-reports', component: ProductReportsComponent },
+    { path: 'review-reports', component: ReviewReportsComponent },
+    { path: 'edit-report/:type/:id', component: EditReportComponent },
+  ] },
+  { path: 'edit-report/:type/:id', component: EditReportComponent },
+  { path: 'add-report/:id', component: AddReportComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
 ];
 

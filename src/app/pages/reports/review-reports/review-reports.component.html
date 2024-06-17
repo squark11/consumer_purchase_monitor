@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h2>Review Reports</h2>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Review ID</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th>Review Content</th>
+        <th>User</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports">
+        <td>{{ report.id }}</td>
+        <td>{{ report.reviewInfo.id }}</td>
+        <td>{{ report.reason }}</td>
+        <td>{{ report.status }}</td>
+        <td>{{ report.createdAt }}</td>
+        <td>{{ report.reviewInfo.comment }}</td>
+        <td>{{ report.reviewInfo.userName }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteReport(report.id)">Delete</button>
+          <button class="btn btn-primary btn-sm" [routerLink]="['/edit-report', 'review', report.id]">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div *ngIf="reports.length === 0" class="alert alert-info mt-3">
+    No review reports found.
+  </div>
+</div>

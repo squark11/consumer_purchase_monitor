@@ -18,12 +18,3 @@ export interface Comment {
     itemsTo: number;
     totalItemsCount: number;
   }
-  
-  export interface CommentReports{
-    id:number;
-    commentId:number;
-    reason:string;
-    status:string;
-    created:string;
-    commentInfo:Comment;
-}

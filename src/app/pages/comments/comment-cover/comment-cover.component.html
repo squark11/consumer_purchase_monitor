@@ -14,7 +14,8 @@
               </div>
               <div>
                 <button *ngIf="!comment.repliedToUserName" class="btn btn-sm btn-outline-primary me-3" (click)="replyToComment(comment.id)">Odpowiedz</button>
-                <button *ngIf="comment.hasUserWritten" class="btn btn-sm btn-outline-danger" (click)="deleteComment(comment.id)">Usuń</button>
+                <button *ngIf="comment.hasUserWritten" class="btn btn-sm btn-outline-danger me-3" (click)="deleteComment(comment.id)">Usuń</button>
+                <button class="btn btn-sm btn-outline-secondary me-3" (click)="report(comment.id)">Report</button>
               </div>
             </div>
           </div>

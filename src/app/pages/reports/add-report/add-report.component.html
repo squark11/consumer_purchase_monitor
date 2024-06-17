@@ -1,0 +1,18 @@
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Report Comment</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="submitReport()">
+          <div class="mb-3">
+            <label for="reportReason" class="form-label">Reason for Report</label>
+            <textarea class="form-control" id="reportReason" rows="3" [(ngModel)]="reportReason" name="reportReason" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Report</button>
+        </form>
+      </div>
+    </div>
+  </div>
