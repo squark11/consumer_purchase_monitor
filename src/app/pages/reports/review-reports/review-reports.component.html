@@ -24,7 +24,7 @@
         <td>{{ report.reviewInfo.comment }}</td>
         <td>{{ report.reviewInfo.userName }}</td>
         <td>
-          <button class="btn btn-danger btn-sm" (click)="deleteReport(report.id)">Delete</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteReport(report.reviewInfo.id)">Delete</button>
           <button class="btn btn-primary btn-sm" [routerLink]="['/edit-report', 'review', report.id]">Edit</button>
         </td>
       </tr>

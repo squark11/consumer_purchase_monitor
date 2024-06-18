@@ -20,12 +20,13 @@
             </div>
           </div>
           <div class="review-content">{{ review.comment }}</div>
-          <div class="review-actions" >
+          <div class="review-actions d-flex align-items-center gap-2">
             <button class="btn btn-primary btn-sm" 
-            [routerLink]="['/products', productId, 'reviews', review.id, 'update']" 
-            [queryParams]="{ comment: review.comment, rating: review.rating }"
+              [routerLink]="['/products', productId, 'reviews', review.id, 'update']" 
+              [queryParams]="{ comment: review.comment, rating: review.rating }"
             >Edytuj</button>
             <button class="btn btn-danger btn-sm" (click)="deleteReview(review.id)">Usuń</button>
+            <app-add-report [reviewId]="review.id" reportType="review"></app-add-report>
           </div>
         </li>
       </ul>

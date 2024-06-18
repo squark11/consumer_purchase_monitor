@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
-import { Observable } from 'rxjs';
 import { User } from './models/user';
 
 
@@ -18,7 +17,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    // Subskrybuj do zmian w currentUser
     this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
     });

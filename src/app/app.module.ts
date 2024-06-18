@@ -31,6 +31,8 @@ import { ProductReportsComponent } from './pages/reports/product-reports/product
 import { ReviewReportsComponent } from './pages/reports/review-reports/review-reports.component';
 import { EditReportComponent } from './pages/reports/edit-report/edit-report.component';
 import { AddReportComponent } from './pages/reports/add-report/add-report.component';
+import { CommentEditComponent } from './pages/comments/comment-edit/comment-edit.component';
+import { ProductsEditComponent } from './pages/products/products-edit/products-edit.component';
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import { AddReportComponent } from './pages/reports/add-report/add-report.compon
     ReviewReportsComponent,
     EditReportComponent,
     AddReportComponent,
+    CommentEditComponent,
+    ProductsEditComponent,
   ],
   imports: [
     BrowserModule,

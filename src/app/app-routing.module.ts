@@ -21,12 +21,12 @@ import { EditReportComponent } from './pages/reports/edit-report/edit-report.com
 import { AddReportComponent } from './pages/reports/add-report/add-report.component';
 
 const routes: Routes = [
-  { path: '', component: ProductsComponent,  canActivate: [AuthGuard]},
+  { path: 'products',  component: ProductsComponent,  canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'product-cover', component: ProductCoverComponent},
-  { path: 'product-cover/:id', component: ProductCoverComponent},
-  { path: 'products/:productId/reviews', component: ReviewsComponent },
+  { path: 'product-cover', component: ProductCoverComponent, canActivate: [AuthGuard]},
+  { path: 'product-cover/:id', component: ProductCoverComponent, canActivate: [AuthGuard]},
+  { path: 'products/:productId/reviews', component: ReviewsComponent, canActivate: [AuthGuard]},
   { path: 'products/:productId/reviews/add', component: AddReviewComponent },
   { path: 'products/:productId/reviews/:reviewId/update', component: UpdateReviewComponent },
   { path: 'purchases', component: PurchaseListComponent, canActivate: [AuthGuard] },

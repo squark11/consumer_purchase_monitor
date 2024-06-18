@@ -19,6 +19,11 @@
       </ngb-rating>
     </div>
   </div>
+  <div class="d-flex gap-2">
+    <button class="btn btn-primary btn-sm" (click)="openEditModal()">Edytuj</button>
+    <button class="btn btn-danger btn-sm" (click)="deleteProduct()">Usuń</button>
+    <app-add-report [productId]="product.id" reportType="product"></app-add-report>
+  </div>
 </div>
 <hr>
 

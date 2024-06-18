@@ -5,6 +5,7 @@ import { CommentsService } from 'src/app/services/comments.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddReportComponent } from '../../reports/add-report/add-report.component';
+import { CommentEditComponent } from '../comment-edit/comment-edit.component';
 
 @Component({
   selector: 'app-comment-cover',
@@ -20,7 +21,6 @@ export class CommentCoverComponent {
   constructor(private likesService: LikesService,
      private commentsService: CommentsService, 
      private route: ActivatedRoute,
-     private router: Router,
      private modalService: NgbModal
     ){}
 
@@ -73,9 +73,17 @@ export class CommentCoverComponent {
       );
     }
   }
-  report(commentId: number) {
-    const modalRef = this.modalService.open(AddReportComponent);
+
+  editComment(commentId: number) {
+    const modalRef = this.modalService.open(CommentEditComponent);
     modalRef.componentInstance.productId = this.productId;
-    modalRef.componentInstance.commentId = commentId;
+    modalRef.componentInstance.comment = this.comment;
+
+    modalRef.result.then((result) => {
+      if (result === 'Comment updated') {
+        this.likeClicked.emit(commentId);
+      }
+    }, (reason) => {
+    });
   }
 }

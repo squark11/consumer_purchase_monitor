@@ -24,7 +24,7 @@
         <td>{{ report.productInfo.name }}</td>
         <td>{{ report.productInfo.category }}</td>
         <td>
-          <button class="btn btn-danger btn-sm" (click)="deleteReport(report.id)">Delete</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteReport(report.productInfo.id)">Delete</button>
           <button class="btn btn-primary btn-sm" [routerLink]="['/edit-report', 'product', report.id]">Edit</button>
         </td>
       </tr>

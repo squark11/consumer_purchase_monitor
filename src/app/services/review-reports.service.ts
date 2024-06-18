@@ -22,13 +22,14 @@ export class ReviewReportsService {
   }
 
   getReviewReports(): Observable<ReportReviewResponse> {
-    return this.httpClient.get<ReportReviewResponse>(`${this.url}pending-requests`,{
+    return this.httpClient.get<ReportReviewResponse>(`${this.url}pending-reports`, {
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
       }
     });
   }
 
+  
 
   deleteReviewReport(reportId: number): Observable<any> {
     return this.httpClient.delete<any>(`${this.url}${reportId}/remove`,{

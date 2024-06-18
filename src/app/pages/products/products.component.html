@@ -65,7 +65,7 @@
 
   <div class="d-flex align-items-center">
     <div class="me-2">
-      <app-add-product (appAddProduct)="refreshPage"></app-add-product>
+      <app-add-product (appAddProduct)="refreshPage()"></app-add-product>
     </div>
 
     <select class="form-select me-2" style="width: auto" [(ngModel)]="PageSize" (ngModelChange)="Page=1; refreshPage()">

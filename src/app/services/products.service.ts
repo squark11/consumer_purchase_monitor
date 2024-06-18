@@ -38,6 +38,14 @@ export class ProductsService {
     });
   }
   
+  updateProduct(id: number, product: ProductItem): Observable<ProductItem> {
+    return this.httpClient.put<ProductItem>(`${this.url}/${id}`, product, {
+      headers: {
+        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
+      }
+    });
+  }
+
   updateProductReview(productId: number, reviewId: number, comment: string, rating: number): Observable<any> {
     return this.httpClient.put<any>(`${this.url}${productId}/reviews/${reviewId}`, {
       comment: comment,

@@ -12,10 +12,11 @@
                 <em class="fa" [ngClass]="{'fa-heart': comment.hasUserLiked, 'fa-heart-o': !comment.hasUserLiked}" (click)="like(comment.id)"></em> 
                 <span>{{ comment.likesCount }}</span>
               </div>
-              <div>
+              <div class=" d-flex align-items-center gap-2">
                 <button *ngIf="!comment.repliedToUserName" class="btn btn-sm btn-outline-primary me-3" (click)="replyToComment(comment.id)">Odpowiedz</button>
+                <button *ngIf="comment.hasUserWritten" class="btn btn-sm btn-outline-secondary me-3" (click)="editComment(comment.id)">Edytuj</button>
                 <button *ngIf="comment.hasUserWritten" class="btn btn-sm btn-outline-danger me-3" (click)="deleteComment(comment.id)">Usuń</button>
-                <button class="btn btn-sm btn-outline-secondary me-3" (click)="report(comment.id)">Report</button>
+                <app-add-report [productId]="productId" [commentId]="comment.id" reportType="comment"></app-add-report>
               </div>
             </div>
           </div>

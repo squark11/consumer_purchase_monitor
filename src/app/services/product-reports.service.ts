@@ -33,6 +33,10 @@ export class ProductReportsService {
 
 
   deleteProductReport(productId: number): Observable<any> {
-    return this.httpClient.delete<any>(`${this.url}requests/product/${productId}`);
+    return this.httpClient.delete<any>(`${this.url}requests/product/${productId}`,{
+      headers: {
+        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
+      }
+    });
   }
 }

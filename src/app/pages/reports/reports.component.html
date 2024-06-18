@@ -1,18 +1,17 @@
 <div class="container mt-4">
-    <h2>Reports</h2>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="comment-reports" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Comment Reports</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="product-reports" routerLinkActive="active">Product Reports</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="review-reports" routerLinkActive="active">Review Reports</a>
-      </li>
-    </ul>
-    <div class="tab-content mt-4">
-      <router-outlet></router-outlet>
-    </div>
+  <h2>Reports</h2>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="comment-reports" routerLinkActive="active" [ngClass]="{'active': activeTab === 'comment-reports'}">Comment Reports</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="product-reports" routerLinkActive="active" [ngClass]="{'active': activeTab === 'product-reports'}">Product Reports</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="review-reports" routerLinkActive="active" [ngClass]="{'active': activeTab === 'review-reports'}">Review Reports</a>
+    </li>
+  </ul>
+  <div class="tab-content mt-4">
+    <router-outlet></router-outlet>
   </div>
-  
+</div>
