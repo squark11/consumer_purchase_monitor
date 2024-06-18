@@ -33,6 +33,7 @@ import { EditReportComponent } from './pages/reports/edit-report/edit-report.com
 import { AddReportComponent } from './pages/reports/add-report/add-report.component';
 import { CommentEditComponent } from './pages/comments/comment-edit/comment-edit.component';
 import { ProductsEditComponent } from './pages/products/products-edit/products-edit.component';
+import { AlertComponent } from './alerts/alert/alert.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { ProductsEditComponent } from './pages/products/products-edit/products-e
     AddReportComponent,
     CommentEditComponent,
     ProductsEditComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
 import { ProductReviewsService } from 'src/app/services/product-reviews.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class AddReviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productReviewsService: ProductReviewsService
+    private productReviewsService: ProductReviewsService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -30,10 +32,12 @@ export class AddReviewComponent implements OnInit {
     this.productReviewsService.addProductReview(this.productId, this.comment, this.rating)
       .subscribe(
         () => {
+          this.alertService.success('Review added successful', true);
           this.goBack();
         },
         error => {
           this.errorMessage = 'Failed to add review. Please try again later.';
+          this.alertService.error(this.errorMessage);
           console.error('Error adding review:', error);
         }
       );
