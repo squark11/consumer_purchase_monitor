@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { User } from './models/user';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 
 
 @Component({
@@ -13,7 +15,7 @@ export class AppComponent {
 
   currentUser:User
 
-  constructor(protected authService:AuthenticationService){
+  constructor(protected authService:AuthenticationService, private modalService: NgbModal){
   }
 
   ngOnInit() {
@@ -24,6 +26,10 @@ export class AppComponent {
   }
   logout() {
     this.authService.logout();
+  }
+
+  openChangePasswordModal() {
+    this.modalService.open(ChangePasswordComponent);
   }
 }
 

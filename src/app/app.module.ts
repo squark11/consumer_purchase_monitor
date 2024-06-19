@@ -34,6 +34,8 @@ import { AddReportComponent } from './pages/reports/add-report/add-report.compon
 import { CommentEditComponent } from './pages/comments/comment-edit/comment-edit.component';
 import { ProductsEditComponent } from './pages/products/products-edit/products-edit.component';
 import { AlertComponent } from './alerts/alert/alert.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
+import { AdminComponent } from './admin/admin/admin.component';
 
 
 @NgModule({
@@ -64,6 +66,8 @@ import { AlertComponent } from './alerts/alert/alert.component';
     CommentEditComponent,
     ProductsEditComponent,
     AlertComponent,
+    ChangePasswordComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

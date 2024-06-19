@@ -13,11 +13,12 @@ export class CommentReportsService {
   
   constructor(private httpClient: HttpClient, private auth:AuthenticationService) { }
 
-  getCommentsReports(): Observable<ReportCommentResponse> {
+  getCommentsReports(params): Observable<ReportCommentResponse> {
     return this.httpClient.get<ReportCommentResponse>(this.url + "/pending-reports",{
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
-      }
+      },
+      params:params
     });
   }
 

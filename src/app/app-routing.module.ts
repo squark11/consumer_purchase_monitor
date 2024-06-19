@@ -19,6 +19,7 @@ import { ProductReportsComponent } from './pages/reports/product-reports/product
 import { ReviewReportsComponent } from './pages/reports/review-reports/review-reports.component';
 import { EditReportComponent } from './pages/reports/edit-report/edit-report.component';
 import { AddReportComponent } from './pages/reports/add-report/add-report.component';
+import { AdminComponent } from './admin/admin/admin.component';
 
 const routes: Routes = [
   { path: 'products',  component: ProductsComponent,  canActivate: [AuthGuard]},
@@ -33,15 +34,15 @@ const routes: Routes = [
   { path: 'purchases/:id', component: PurchaseDetailComponent, canActivate: [AuthGuard] },
   { path: 'add-purchase', component: AddPurchaseComponent, canActivate: [AuthGuard] },
   { path: 'update-expense-limit', component: UpdateExpenseLimitComponent, canActivate: [AuthGuard] },
-  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] ,children: [
     { path: 'comment-reports', component: CommentReportsComponent },
     { path: 'product-reports', component: ProductReportsComponent },
     { path: 'review-reports', component: ReviewReportsComponent },
     { path: 'edit-report/:type/:id', component: EditReportComponent },
   ] },
-  { path: 'edit-report/:type/:id', component: EditReportComponent },
-  { path: 'add-report/:id', component: AddReportComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]}, 
+  { path: 'edit-report/:type/:id', component: EditReportComponent, canActivate: [AuthGuard]},
+  { path: 'add-report/:id', component: AddReportComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
 ];
 

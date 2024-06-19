@@ -21,11 +21,12 @@ export class ReviewReportsService {
     });
   }
 
-  getReviewReports(): Observable<ReportReviewResponse> {
+  getReviewReports(params): Observable<ReportReviewResponse> {
     return this.httpClient.get<ReportReviewResponse>(`${this.url}pending-reports`, {
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
-      }
+      },
+      params:params
     });
   }
 

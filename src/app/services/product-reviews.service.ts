@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { reviewItemsResponse } from '../models/review-models';
+import { reviewItemsResponse } from '../models/review.models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,12 @@ export class ProductReviewsService {
 
   constructor(private httpClient: HttpClient, private auth:AuthenticationService) { }
 
-  getProductReviews(productId: number): Observable<reviewItemsResponse> {
+  getProductReviews(productId: number, params:any): Observable<reviewItemsResponse> {
     return this.httpClient.get<reviewItemsResponse>(`${this.url}${productId}/reviews`, {
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
-      }
+      }, 
+      params: params
     });
   }
 

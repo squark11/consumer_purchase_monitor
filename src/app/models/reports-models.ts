@@ -1,6 +1,6 @@
 import { Comment } from "./comments.models";
 import { ProductItem } from "./product-models";
-import { reviewItem } from "./review-models";
+import { reviewItem } from "./review.models";
 
 
 export interface ProductReportItem {

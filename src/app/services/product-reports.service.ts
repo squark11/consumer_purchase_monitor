@@ -12,11 +12,12 @@ export class ProductReportsService {
   url = "https://localhost:44324/api/product-reports/";
   constructor(private httpClient: HttpClient, private auth:AuthenticationService) { }
 
-  getProductReports(): Observable<ReportProductResponse> {
+  getProductReports(params): Observable<ReportProductResponse> {
     return this.httpClient.get<ReportProductResponse>(`${this.url}pending-requests`,{
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
-      }
+      },
+      params:params
     });
   }
 

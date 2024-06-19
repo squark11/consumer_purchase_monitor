@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { reviewItem } from 'src/app/models/review-models';
+import { Pagination } from 'src/app/models/pagination';
+import { reviewItem } from 'src/app/models/review.models';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ProductReviewsService } from 'src/app/services/product-reviews.service';
 
@@ -13,6 +14,19 @@ export class ReviewsComponent{
   @Input() productId:number;
   reviews: reviewItem[];
   canAddReview:boolean;
+
+  pagination: Pagination = {
+    totalPages: null,
+    itemsFrom: null,
+    itemsTo: null,
+    totalItemsCount: null
+  };
+
+  filter:any = {
+    PageNumber: this.pagination.itemsFrom | 1,
+    PageSize: this.pagination.itemsTo | 5,
+    sortBy: 'newest'
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -28,8 +42,9 @@ export class ReviewsComponent{
   }
 
   loadReviews() {
-    this.productReviewsService.getProductReviews(this.productId).subscribe(reviews => {
+    this.productReviewsService.getProductReviews(this.productId, this.filter).subscribe(reviews => {
       this.reviews = reviews.items;
+      this.pagination = reviews;
       if (this.reviews.some(review => review.hasUserCreated)) {
         this.canAddReview = false;
       }else{

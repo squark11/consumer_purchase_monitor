@@ -17,7 +17,11 @@ export class UserService {
     return this.http.post(this.url+`/register`, user);
   }
   changePassword(password:NewPassword){
-    return this.http.post(this.url+'/change-password', password)
+    return this.http.post(this.url+'/change-password', password, {
+      headers: {
+        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
+      }
+    })
   }
   getUserByEmail(email: string): Observable<User> {
     return this.http.get<User>(`https://localhost:44324/api/admin/get-user-by-email/${email}`,{

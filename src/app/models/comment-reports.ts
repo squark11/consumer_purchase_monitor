@@ -1,4 +1,4 @@
-import { CommentsResponse } from "./commentsItem";
+import { Comment } from "./comments.models";
 
 export interface CommentReports{
     id:number;
@@ -6,5 +6,5 @@ export interface CommentReports{
     reason:string;
     status:string;
     created:string;
-    commentInfo:CommentsResponse;
+    commentInfo:Comment;
 }
