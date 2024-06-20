@@ -18,7 +18,8 @@
       <p>id: {{ user.id }}</p>
       <p>Email: {{ user.email }}</p>
       <p>Name: {{ user.username }}</p>
-      <button class="btn btn-success" (click)="grantAdmin()">Add Admin</button>
+      <p>Role: {{ user.roleName }}</p>
+      <button *ngIf="user.roleName!='Admin'" class="btn btn-success" (click)="grantAdmin()">Add Admin</button>
     </div>
   </div>
 
