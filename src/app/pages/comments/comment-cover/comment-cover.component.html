@@ -17,8 +17,8 @@
                   More
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-                  <li *ngIf="!comment.repliedToUserName">
-                    <button class="dropdown-item" (click)="replyToComment(comment.id)" [routerLink]="'./'" fragment="comment">Reply</button>
+                  <li *ngIf="!comment.repliedToUserName ">
+                    <button class="dropdown-item" (click)="replyToComment(comment)" [routerLink]="'./'" fragment="comment">Reply</button>
 
                   </li>
                   <li *ngIf="comment.hasUserWritten">

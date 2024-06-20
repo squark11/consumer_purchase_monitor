@@ -16,7 +16,7 @@ export class CommentCoverComponent {
   @Input() comment: Comment;
   productId: number;
   @Output() likeClicked = new EventEmitter<number>();
-  @Output() replyClicked = new EventEmitter<number>();
+  @Output() replyClicked = new EventEmitter<Comment>();
   
   
   constructor(private likesService: LikesService,
@@ -59,8 +59,8 @@ export class CommentCoverComponent {
     }
   }
 
-  replyToComment(commentId: number) {
-    this.replyClicked.emit(commentId); 
+  replyToComment(comment:Comment) {
+    this.replyClicked.emit(comment); 
   }
 
   deleteComment(commentId: number) {

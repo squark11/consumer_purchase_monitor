@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Comment, PaginatedComments } from 'src/app/models/comments.models';
 import { Pagination } from 'src/app/models/pagination';
+import { AlertService } from 'src/app/services/alert.service';
 import { CommentsService } from 'src/app/services/comments.service';
 import { LikesService } from 'src/app/services/likes.service';
 
@@ -30,7 +31,8 @@ export class CommentsComponent {
     SortBy: 'newest'
   };
 
-  constructor(private commentsService: CommentsService, private likesService: LikesService) {}
+  constructor(private commentsService: CommentsService, private likesService: LikesService, private alert: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.getComments();
@@ -43,7 +45,7 @@ export class CommentsComponent {
         this.pagination = comments; 
       },
       error => {
-        console.error('Error fetching comments:', error);
+        this.alert.error(error);
       }
     );
   }
@@ -52,11 +54,11 @@ export class CommentsComponent {
     this.commentsService.postComment(productId, content)
       .subscribe(
         response => {
-          console.log('Comment added:', response);
+          this.alert.success('Comment added');
           this.getComments(); 
         },
         error => {
-          console.error('Error adding comment:', error);
+          this.alert.error(error);
         }
       );
   }
@@ -65,13 +67,12 @@ export class CommentsComponent {
     this.commentsService.postCommentReply(productId, commentId, content)
       .subscribe(
         response => {
-          console.log('Reply added:', response);
+          this.alert.success('Reply added');
           this.getComments(); 
-          this.toggleReplyForm(commentId);
           this.showMainCommentForm = true; 
         },
         error => {
-          console.error('Error adding reply:', error);
+          this.alert.error(error);
         }
       );
   }
@@ -81,9 +82,9 @@ export class CommentsComponent {
     this.getComments(); 
   }
 
-  toggleReplyForm(commentId: number) {
-    this.showReplyFormId = this.showReplyFormId === commentId ? null : commentId;
-    this.replyContent = '';
+  toggleReplyForm(commentReply: Comment) {
+    this.showReplyFormId = this.showReplyFormId === commentReply.id ? null : commentReply.id, null;
+    this.replyContent = '@'+commentReply.userName+' ';
     this.showMainCommentForm = false; 
   }
 }

@@ -39,7 +39,7 @@
     </select>
   </div>
 
-  <app-comment-cover *ngFor="let comment of comments" [comment]="comment" (likeClicked)="getComments()" (replyClicked)="toggleReplyForm(comment.id)"></app-comment-cover>
+  <app-comment-cover *ngFor="let comment of comments" [comment]="comment" (likeClicked)="getComments()" (replyClicked)="toggleReplyForm(comment)"></app-comment-cover>
   <div class="d-flex justify-content-between align-items-center p-2">
     <ngb-pagination [collectionSize]="pagination.totalItemsCount" [(page)]="filter.PageNumber" [pageSize]="filter.PageSize" (pageChange)="getComments()">
     </ngb-pagination>

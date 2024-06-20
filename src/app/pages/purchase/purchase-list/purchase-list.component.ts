@@ -14,7 +14,7 @@ export class PurchaseListComponent {
   purchases: UserPurchasesResponse['purchases'];
   updateLimitForm: FormGroup;
 
-  pagination: Pagination = {
+  pagination: UserPurchasesResponse = {
     totalPages: null,
     itemsFrom: 1,
     itemsTo: 5,
@@ -24,12 +24,7 @@ export class PurchaseListComponent {
   filter:any = {
     PageNumber: this.pagination.itemsFrom ,
     PageSize: this.pagination.itemsTo,
-    Year: "",
-    Month:"",
-    SortDirection:0,
-    MinPrice:"",
-    MaxPrice:"",
-    SearchPhrase:""
+    SortDirection:0
   }
 
   

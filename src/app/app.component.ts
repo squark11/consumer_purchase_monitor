@@ -25,7 +25,7 @@ export class AppComponent {
     console.log(this.authService.currentUserValue)
   }
   logout() {
-    // this.authService.logout();
+    this.authService.logout();
   }
 
   openChangePasswordModal() {
