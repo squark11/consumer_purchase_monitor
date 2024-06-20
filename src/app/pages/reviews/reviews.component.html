@@ -1,32 +1,32 @@
 <div class="product-reviews-container">
   <div class="d-flex align-items-center justify-content-between">
-    <h2 class="product-reviews-title">Recenzje produktu</h2>
+    <h2 class="product-reviews-title">Product Reviews</h2>
     
-    <!-- Elementy filtrowania (przeniesione na prawo) -->
+    <!-- Filter elements (moved to the right) -->
     <div class="d-flex align-items-center">
       <div class="btn-group me-2">
         <button type="button" class="btn btn-outline-secondary" [class.active]="filter.sortBy === 'newest'" (click)="filter.sortBy='newest'; loadReviews()">
-          Sortuj po dacie
+          Sort by Date
         </button>
-        <button type="button" class="btn btn-outline-secondary" [class.active]="filter.sortBy === 'rating'" (click)="filter.sortBy='rating'; ; loadReviews()">
-          Sortuj po ocenie
+        <button type="button" class="btn btn-outline-secondary" [class.active]="filter.sortBy === 'rating'" (click)="filter.sortBy='rating'; loadReviews()">
+          Sort by Rating
         </button>
       </div>
       
       <select class="form-select me-2" style="width: auto" [(ngModel)]="filter.PageSize" (ngModelChange)="filter.PageNumber=1; loadReviews()">
-        <option [ngValue]="5">5 pozycji na stronę</option>
-        <option [ngValue]="10">10 pozycji na stronę</option>
-        <option [ngValue]="15">15 pozycji na stronę</option>
+        <option [ngValue]="5">5 items per page</option>
+        <option [ngValue]="10">10 items per page</option>
+        <option [ngValue]="15">15 items per page</option>
       </select>
     </div>
   </div>
 
-  <!-- Lista recenzji -->
+  <!-- Reviews list -->
   <div *ngIf="reviews && reviews.length > 0;">
     <ul class="list-group">
       <li class="list-group-item product-review-item" *ngFor="let review of reviews">
         <div class="review-header">
-          <span class="username">{{ review.userName }}</span> - <span class="date">{{ review.created | date: 'dd/MM/yyyy' }}</span>
+          <span class="username">{{ review.userName }}</span> - <span class="date">{{ review.created | date: 'MM/dd/yyyy' }}</span>
           <div class="rating-stars">
             <ng-template #t let-fill="fill">
               <span class="star" [class.full]="fill === 100">
@@ -45,25 +45,25 @@
           <button class="btn btn-primary btn-sm"
             [routerLink]="['/products', productId, 'reviews', review.id, 'update']"
             [queryParams]="{ comment: review.comment, rating: review.rating }"
-          >Edytuj</button>
-          <button class="btn btn-danger btn-sm" (click)="deleteReview(review.id)">Usuń</button>
+          >Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteReview(review.id)">Delete</button>
           <app-add-report [reviewId]="review.id" reportType="review"></app-add-report>
         </div>
       </li>
     </ul>
   </div>
 
-  <!-- Komunikat o braku recenzji -->
+  <!-- No reviews message -->
   <ng-template #noReviews>
-    <p class="no-reviews-message">Brak recenzji dla tego produktu.</p>
+    <p class="no-reviews-message">No reviews for this product.</p>
   </ng-template>
 
-  <!-- Paginacja -->
+  <!-- Pagination -->
   <div class="d-flex justify-content-between align-items-center p-2">
     <ngb-pagination [collectionSize]="pagination.totalItemsCount" [(page)]="filter.PageNumber" [pageSize]="filter.PageSize" (pageChange)="loadReviews()">
     </ngb-pagination>
   </div>
 </div>
 
-<!-- Przycisk dodania nowej recenzji -->
-<a *ngIf="canAddReview" [routerLink]="['/products', productId, 'reviews', 'add']" class="btn btn-primary mt-3">Dodaj opinię</a>
+<!-- Add new review button -->
+<a *ngIf="canAddReview" [routerLink]="['/products', productId, 'reviews', 'add']" class="btn btn-primary mt-3">Add Review</a>

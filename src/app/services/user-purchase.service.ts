@@ -22,11 +22,14 @@ export class UserPurchaseService {
     });
   }
 
-  getUserPurchases(): Observable<UserPurchasesResponse> {
+
+  
+  getUserPurchases(params?:any): Observable<UserPurchasesResponse> {
     return this.httpClient.get<UserPurchasesResponse>(`${this.url}user-purchases`, {
       headers: {
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
-      }
+      },
+      params:params
     });
   }
 

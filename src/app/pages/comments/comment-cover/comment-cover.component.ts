@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { Comment } from 'src/app/models/comments.models';
 import { LikesService } from 'src/app/services/likes.service';
 import { CommentsService } from 'src/app/services/comments.service';
@@ -18,13 +18,17 @@ export class CommentCoverComponent {
   @Output() likeClicked = new EventEmitter<number>();
   @Output() replyClicked = new EventEmitter<number>();
   
+  
   constructor(private likesService: LikesService,
      private commentsService: CommentsService, 
      private route: ActivatedRoute,
-     private modalService: NgbModal
+     private modalService: NgbModal,
+     private router: Router,
     ){}
 
   ngOnInit(): void {
+    const currentPath = this.router.url;
+
     this.route.paramMap.subscribe(params => {
       this.productId = +params.get('id'); 
     });

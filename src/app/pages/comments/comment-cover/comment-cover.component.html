@@ -1,23 +1,36 @@
 <div class="row justify-content-center">
   <div class="col-md-11 col-lg-9 col-xl-7">
-    <div class="card mb-4 border-0 shadow rounded-3" style="background-color: rgba(255, 255, 255, 0.9);"> 
+    <div class="card mb-4 border-0 shadow rounded-3" style="background-color: rgba(255, 255, 255, 0.9);">
       <div class="card-body">
         <div class="media">
-          <img class="rounded-circle shadow-sm me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65" height="65" /> 
+          <img class="rounded-circle shadow-sm me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65" height="65" id="comment" />
           <div class="media-body">
             <h5 class="mt-0">{{ comment.userName }}</h5>
             <p class="mb-0">{{ comment.content }}</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex align-items-center">
-                <em class="fa" [ngClass]="{'fa-heart': comment.hasUserLiked, 'fa-heart-o': !comment.hasUserLiked}" (click)="like(comment.id)"></em> 
-                <span>{{ comment.likesCount }}</span>
+                <em class="fa" [ngClass]="{'fa-heart': comment.hasUserLiked, 'fa-heart-o': !comment.hasUserLiked}" (click)="like(comment.id)"></em>
+                <span>{{ comment.likesCount }} likes</span>
               </div>
-              <div class=" d-flex align-items-center gap-2">
-                <button *ngIf="!comment.repliedToUserName" class="btn btn-sm btn-outline-primary me-3" (click)="replyToComment(comment.id)">Odpowiedz</button>
-                <button *ngIf="comment.hasUserWritten" class="btn btn-sm btn-outline-secondary me-3" (click)="editComment(comment.id)">Edytuj</button>
-                <button *ngIf="comment.hasUserWritten" class="btn btn-sm btn-outline-danger me-3" (click)="deleteComment(comment.id)">Usuń</button>
+              <div class="dropdown d-flex gap-2" ngbDropdown >
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" ngbDropdownToggle type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  More
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                  <li *ngIf="!comment.repliedToUserName">
+                    <button class="dropdown-item" (click)="replyToComment(comment.id)" [routerLink]="'./'" fragment="comment">Reply</button>
+
+                  </li>
+                  <li *ngIf="comment.hasUserWritten">
+                    <button class="dropdown-item" (click)="editComment(comment.id)">Edit</button>
+                  </li>
+                  <li *ngIf="comment.hasUserWritten">
+                    <button class="dropdown-item" (click)="deleteComment(comment.id)">Delete</button>
+                  </li>
+                </ul>
                 <app-add-report [productId]="productId" [commentId]="comment.id" reportType="comment"></app-add-report>
               </div>
+                
             </div>
           </div>
         </div>

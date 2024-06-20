@@ -3,14 +3,13 @@
     <ng-container *ngIf="!showReplyFormId; else replyForm">
       <div class="d-flex justify-content-start align-items-center w-100 mb-3">
         <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="40" height="40" />
-        <div data-mdb-input-init class="form-outline flex-grow-1">
+        <div data-mdb-input-init class="form-outline flex-grow-1" id="comment">
           <label class="form-label" for="textAreaExample">Comment</label>
           <textarea class="form-control" [(ngModel)]="content" id="textAreaExample" rows="4" style="background: #fff;"></textarea>
         </div>
         <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-sm ms-3" (click)="postComment(id, content)">Post comment</button>
       </div>
     </ng-container>
-
     <ng-template #replyForm>
       <div class="d-flex justify-content-start align-items-center w-100 mb-3">
         <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="40" height="40" />
@@ -23,5 +22,26 @@
     </ng-template>
   </div>
 
-  <app-comment-cover *ngFor="let comment of comments" [comment]="comment"  (likeClicked)="getComments()" (replyClicked)="toggleReplyForm(comment.id)"></app-comment-cover>
+  <div class="d-flex align-items-center justify-content-end mb-3">
+    <div class="btn-group me-2 ms-auto">
+      <button type="button" class="btn btn-outline-secondary" [class.active]="filter.SortBy === 'newest'" (click)="filter.SortBy='newest'; getComments()">
+        Sort by Date
+      </button>
+      <button type="button" class="btn btn-outline-secondary" [class.active]="filter.SortBy === 'best'" (click)="filter.SortBy='best'; getComments()">
+        Sort by Rating
+      </button>
+    </div>
+    
+    <select class="form-select me-2" style="width: auto" [(ngModel)]="filter.PageSize" (ngModelChange)="filter.PageNumber=1; getComments()">
+      <option [ngValue]="5">5 items per page</option>
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="15">15 items per page</option>
+    </select>
+  </div>
+
+  <app-comment-cover *ngFor="let comment of comments" [comment]="comment" (likeClicked)="getComments()" (replyClicked)="toggleReplyForm(comment.id)"></app-comment-cover>
+  <div class="d-flex justify-content-between align-items-center p-2">
+    <ngb-pagination [collectionSize]="pagination.totalItemsCount" [(page)]="filter.PageNumber" [pageSize]="filter.PageSize" (pageChange)="getComments()">
+    </ngb-pagination>
+  </div>
 </section>

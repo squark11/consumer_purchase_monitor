@@ -10,7 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ProductCoverComponent } from './pages/products/product-cover/product-cover.component';
 import { AddProductComponent } from './pages/products/add-product/add-product.component';
@@ -78,7 +78,8 @@ import { AdminComponent } from './admin/admin/admin.component';
     NgbModule,
     NgbPaginationModule,
     NgbTypeaheadModule,
-    FormsModule 
+    FormsModule,
+    NgbDropdownModule
   
   ],
   providers: [

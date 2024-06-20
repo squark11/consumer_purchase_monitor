@@ -1,13 +1,13 @@
 <h2>Zaktualizuj opinię</h2>
 <form (ngSubmit)="updateReview()">
   <div class="form-group">
-    <label for="comment">Komentarz:</label>
+    <label for="comment">Comment:</label>
     <textarea id="comment" class="form-control" [(ngModel)]="comment" name="comment" required></textarea>
   </div>
   <div class="form-group">
-    <label for="rating">Ocena:</label>
+    <label for="rating">Review:</label>
     <input id="rating" type="number" class="form-control" [(ngModel)]="rating" name="rating" required>
   </div>
-  <button type="submit" class="btn btn-success">Zaktualizuj</button>
-  <button type="button" class="btn btn-secondary" (click)="goBack()">Anuluj</button>
+  <button type="submit" class="btn btn-success">Update</button>
+  <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
 </form>

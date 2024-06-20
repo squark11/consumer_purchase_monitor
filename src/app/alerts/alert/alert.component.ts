@@ -19,10 +19,10 @@ export class AlertComponent {
           .subscribe(message => {
               switch (message && message.type) {
                   case 'success':
-                      message.cssClass = 'alert alert-success';
+                      message.type = 'success';
                       break;
                   case 'error':
-                      message.cssClass = 'alert alert-danger';
+                      message.type = 'danger';
                       break;
               }
               this.message = message;
@@ -33,7 +33,9 @@ export class AlertComponent {
   ngOnDestroy() {
       this.subscription.unsubscribe();
       clearTimeout(this.alertTimeout); 
+      this.message=null;
   }
+
 
   private setAlertTimeout() {
       if (this.alertTimeout) {

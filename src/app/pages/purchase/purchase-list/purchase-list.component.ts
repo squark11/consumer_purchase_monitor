@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Pagination } from 'src/app/models/pagination';
 import { Purchase, UserPurchasesResponse } from 'src/app/models/user-purchase.models';
 import { UserPurchaseService } from 'src/app/services/user-purchase.service';
 
@@ -13,6 +14,25 @@ export class PurchaseListComponent {
   purchases: UserPurchasesResponse['purchases'];
   updateLimitForm: FormGroup;
 
+  pagination: Pagination = {
+    totalPages: null,
+    itemsFrom: 1,
+    itemsTo: 5,
+    totalItemsCount: null
+  };
+
+  filter:any = {
+    PageNumber: this.pagination.itemsFrom ,
+    PageSize: this.pagination.itemsTo,
+    Year: "",
+    Month:"",
+    SortDirection:0,
+    MinPrice:"",
+    MaxPrice:"",
+    SearchPhrase:""
+  }
+
+  
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -28,8 +48,9 @@ export class PurchaseListComponent {
   }
 
   loadPurchases(): void {
-    this.userPurchaseService.getUserPurchases().subscribe(response => {
+    this.userPurchaseService.getUserPurchases(this.filter).subscribe(response => {
       this.purchases = response.purchases;
+      this.pagination = response;
       this.updateLimitForm.patchValue({
         expenseLimit: response.monthlyExpenseLimit
       });

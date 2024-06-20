@@ -1,1 +1,29 @@
-<app-comment-cover *ngFor="let comment of comments" [comment]="comment" (likeClicked)="getComments()">a</app-comment-cover>
+<div class="d-flex align-items-center justify-content-end mb-3">
+    <div class="btn-group me-2 ms-auto">
+      <button type="button" class="btn btn-outline-secondary" [class.active]="filter.SortBy === 'newest'" (click)="filter.SortBy='newest'; getComments()">
+        Sort by Date
+      </button>
+      <button type="button" class="btn btn-outline-secondary" [class.active]="filter.SortBy === 'best'" (click)="filter.SortBy='best'; getComments()">
+        Sort by Rating
+      </button>
+    </div>
+    
+    <select class="form-select me-2" style="width: auto" [(ngModel)]="filter.PageSize" (ngModelChange)="filter.PageNumber=1; getComments()">
+      <option [ngValue]="5">5 items per page</option>
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="15">15 items per page</option>
+    </select>
+  </div>
+  
+    <div class="row">
+      <div class="col">
+        <app-comment-cover *ngFor="let comment of comments" [comment]="comment" (likeClicked)="getComments()"></app-comment-cover>
+      </div>
+    </div>
+  
+    <div class="row justify-content-center mt-3">
+      <div class="col-auto">
+        <ngb-pagination [collectionSize]="pagination.totalItemsCount" [(page)]="filter.PageNumber" [pageSize]="filter.PageSize" (pageChange)="getComments()">
+        </ngb-pagination>
+      </div>
+    </div>

@@ -12,11 +12,12 @@ export class CommentsService {
   url = "https://localhost:44324/api/products/"
   constructor(private httpClient: HttpClient, private auth:AuthenticationService) { }
 
-  getComments(productId: number): Observable<PaginatedComments> {
+  getComments(productId: number, params): Observable<PaginatedComments> {
     return this.httpClient.get<PaginatedComments>(`${this.url}${productId}/comments`, {
       headers:{
         'Authorization': 'Bearer ' + this.auth.currentUserValue.token
-      }
+      },
+      params:params
     });
   }
 
