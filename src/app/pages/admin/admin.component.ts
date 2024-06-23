@@ -21,7 +21,6 @@ export class AdminComponent {
     this.adminService.getUserByEmail(this.email).subscribe({
       next: (response) => {
         this.user = response;
-        this.successMessage = 'User found!';
       },
       error: (error) => {
         this.errorMessage = 'Error finding user. Please try again.';
@@ -31,17 +30,14 @@ export class AdminComponent {
   }
 
   grantAdmin() {
-    if (!this.user) {
-      this.errorMessage = 'No user selected.';
-      return;
-    }
     this.adminService.postAdmin(this.user.id).subscribe({
       next: (response) => {
         this.successMessage = 'Admin rights granted successfully!';
         this.alert.success(this.successMessage);
       },
       error: (error) => {
-        this.alert.error(error);
+        this.errorMessage = 'Failed to grant admin rights. Please try again later.';
+        this.alert.success(this.successMessage);
       }
     });
   }

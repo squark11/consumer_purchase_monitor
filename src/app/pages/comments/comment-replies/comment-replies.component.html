@@ -1,4 +1,4 @@
-<div class="d-flex align-items-center justify-content-end mb-3">
+<div class="d-flex align-items-center justify-content-end mb-3" *ngIf="comments">
     <div class="btn-group me-2 ms-auto">
       <button type="button" class="btn btn-outline-secondary" [class.active]="filter.SortBy === 'newest'" (click)="filter.SortBy='newest'; getComments()">
         Sort by Date
@@ -21,7 +21,7 @@
       </div>
     </div>
   
-    <div class="row justify-content-center mt-3">
+    <div class="row justify-content-center mt-3" *ngIf="comments">
       <div class="col-auto">
         <ngb-pagination [collectionSize]="pagination.totalItemsCount" [(page)]="filter.PageNumber" [pageSize]="filter.PageSize" (pageChange)="getComments()">
         </ngb-pagination>

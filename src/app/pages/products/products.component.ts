@@ -5,6 +5,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 
 import { ProductsService } from 'src/app/services/products.service';
 import { FiltersProduct, ProductItem } from 'src/app/models/product-models';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,7 @@ export class ProductsComponent {
   products: ProductItem[];
   filters: FiltersProduct;
 
-  constructor(private http: ProductsService, private authService: AuthenticationService, private productService:ProductsService) {
+  constructor(private http: ProductsService, private authService: AuthenticationService, private productService:ProductsService, private alert:AlertService) {
     this.refreshPage();
   }
 
@@ -49,13 +50,5 @@ export class ProductsComponent {
     this.SortDirection ==0?this.SortDirection=1:this.SortDirection=0;
     this.refreshPage();
   }
-  delete(id:number){
-    this.productService.deleteProduct(id).subscribe(
-      result => {
-        console.log(result);
-        this.refreshPage();
-      },
-      error => console.error(error)
-    );
-  }
+  
 }

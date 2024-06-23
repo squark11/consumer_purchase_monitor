@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductReviewsService } from 'src/app/services/product-reviews.service';
+import { AlertService } from 'src/app/services/alert.service'; 
 
 @Component({
   selector: 'app-update-review',
@@ -16,7 +17,8 @@ export class UpdateReviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productReviewsService: ProductReviewsService
+    private productReviewsService: ProductReviewsService,
+    private alertService: AlertService 
   ) { }
 
   ngOnInit(): void {
@@ -24,13 +26,22 @@ export class UpdateReviewComponent implements OnInit {
     this.reviewId = +this.route.snapshot.paramMap.get('reviewId');
     this.route.queryParams.subscribe(params => {
       this.comment = params['comment'];
-      this.rating = params['rating'];
+      this.rating = +params['rating'];
     });
   }
 
   updateReview(): void {
     this.productReviewsService.updateProductReview(this.productId, this.reviewId, this.comment, this.rating)
-      .subscribe(() => this.goBack());
+      .subscribe(
+        () => {
+          this.alertService.success('Review updated successfully'); 
+          this.goBack();
+        },
+        error => {
+          console.error('Error updating review:', error);
+          this.alertService.error('Failed to update review. Please try again later.'); 
+        }
+      );
   }
   
   goBack(): void {

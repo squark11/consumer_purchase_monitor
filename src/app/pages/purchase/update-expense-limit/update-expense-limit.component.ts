@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserPurchaseService } from 'src/app/services/user-purchase.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-update-expense-limit',
@@ -14,7 +15,8 @@ export class UpdateExpenseLimitComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userPurchaseService: UserPurchaseService
+    private userPurchaseService: UserPurchaseService,
+    private alertService: AlertService
   ) {
     this.updateExpenseLimitForm = this.fb.group({
       newLimit: ['', Validators.required]
@@ -26,8 +28,14 @@ export class UpdateExpenseLimitComponent {
   onSubmit(): void {
     if (this.updateExpenseLimitForm.valid) {
       this.userPurchaseService.updateExpenseLimit(this.updateExpenseLimitForm.value).subscribe(() => {
+        this.alertService.success('Expense limit updated successfully');
         this.router.navigate(['/purchases']);
+      }, error => {
+        this.alertService.error('Error updating expense limit');
+        console.error('Error updating expense limit:', error);
       });
+    } else {
+      this.alertService.error('Please fill in the new limit');
     }
   }
 

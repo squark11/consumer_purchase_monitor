@@ -19,7 +19,7 @@ import { ProductReportsComponent } from './pages/reports/product-reports/product
 import { ReviewReportsComponent } from './pages/reports/review-reports/review-reports.component';
 import { EditReportComponent } from './pages/reports/edit-report/edit-report.component';
 import { AddReportComponent } from './pages/reports/add-report/add-report.component';
-import { AdminComponent } from './admin/admin/admin.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   { path: 'products',  component: ProductsComponent,  canActivate: [AuthGuard]},

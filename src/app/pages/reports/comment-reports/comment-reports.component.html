@@ -20,7 +20,7 @@
         <td>{{ report.commentId }}</td>
         <td>{{ report.reason }}</td>
         <td>{{ report.status }}</td>
-        <td>{{ report.createdAt }}</td>
+        <td>{{ report.createdAt | date: 'MM/dd/yyyy'}}</td>
         <td>{{ report.commentInfo.content }}</td>
         <td>{{ report.commentInfo.userName }}</td>
         <td>

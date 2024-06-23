@@ -1,26 +1,31 @@
 <section style="background-color: #eee;">
+
   <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
     <ng-container *ngIf="!showReplyFormId; else replyForm">
-      <div class="d-flex justify-content-start align-items-center w-100 mb-3">
-        <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="40" height="40" />
-        <div data-mdb-input-init class="form-outline flex-grow-1" id="comment">
-          <label class="form-label" for="textAreaExample">Comment</label>
-          <textarea class="form-control" [(ngModel)]="content" id="textAreaExample" rows="4" style="background: #fff;"></textarea>
+      <div class="d-flex align-items-end mb-3 justify-content-end">
+        <div class="flex-grow-1" style="padding: 20px;">
+          <label class="form-label">Comment:</label>
+          <textarea class="form-control" [(ngModel)]="content" rows="4" style="background: #ffffff; border: 1px solid #ffffff; padding: 8px; margin-top: 5px;"></textarea>
+          <button type="button" class="btn btn-primary mt-3" style="font-size: 14px; padding: 6px 12px;" (click)="postComment(id, content)">
+            Post comment
+          </button>
         </div>
-        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-sm ms-3" (click)="postComment(id, content)">Post comment</button>
       </div>
     </ng-container>
+  
     <ng-template #replyForm>
-      <div class="d-flex justify-content-start align-items-center w-100 mb-3">
-        <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="40" height="40" />
-        <div data-mdb-input-init class="form-outline flex-grow-1">
-          <label class="form-label" for="textAreaReply">Reply: </label>
-          <textarea class="form-control" [(ngModel)]="replyContent" id="textAreaReply" rows="4" style="background: #fff;"></textarea>
+      <div class="d-flex align-items-end mb-3 justify-content-end">
+        <div class="flex-grow-1" style="padding: 20px;">
+          <label class="form-label">Reply:</label>
+          <textarea class="form-control" [(ngModel)]="replyContent" rows="4" style="background: #ffffff; border: 1px solid #ffffff; padding: 8px; margin-top: 5px;"></textarea>
+          <button type="button" class="btn btn-primary mt-3" style="font-size: 14px; padding: 6px 12px;" (click)="postReply(id, showReplyFormId, replyContent)">
+            Post reply
+          </button>
         </div>
-        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-sm ms-3" (click)="postReply(id, showReplyFormId, replyContent)">Post reply</button>
       </div>
     </ng-template>
   </div>
+  
 
   <div class="d-flex align-items-center justify-content-end mb-3">
     <div class="btn-group me-2 ms-auto">
@@ -38,8 +43,9 @@
       <option [ngValue]="15">15 items per page</option>
     </select>
   </div>
-
+  
   <app-comment-cover *ngFor="let comment of comments" [comment]="comment" (likeClicked)="getComments()" (replyClicked)="toggleReplyForm(comment)"></app-comment-cover>
+
   <div class="d-flex justify-content-between align-items-center p-2">
     <ngb-pagination [collectionSize]="pagination.totalItemsCount" [(page)]="filter.PageNumber" [pageSize]="filter.PageSize" (pageChange)="getComments()">
     </ngb-pagination>

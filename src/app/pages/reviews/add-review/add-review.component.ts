@@ -9,7 +9,7 @@ import { ProductReviewsService } from 'src/app/services/product-reviews.service'
   styleUrls: ['./add-review.component.css']
 })
 export class AddReviewComponent implements OnInit {
-  productId: number;
+  @Input() productId: number;
   comment: string;
   rating: number;
   errorMessage: string;
@@ -32,7 +32,7 @@ export class AddReviewComponent implements OnInit {
     this.productReviewsService.addProductReview(this.productId, this.comment, this.rating)
       .subscribe(
         () => {
-          this.alertService.success('Review added successful', true);
+          this.alertService.success('Review added successfully', true);
           this.goBack();
         },
         error => {

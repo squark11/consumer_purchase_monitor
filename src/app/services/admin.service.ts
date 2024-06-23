@@ -14,18 +14,22 @@ export class AdminService {
   
   constructor(private http: HttpClient, private auth:AuthenticationService) { }
 
-  postAdmin(id:number){
-    return this.http.post(this.url+`/grant-admin/`+id,{
-      headers: {
-        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
+  postAdmin(id: number): Observable<any> {
+    return this.http.post(
+      `${this.url}/grant-admin/${id}`,{
+
+      }, {
+        headers: {
+          Authorization: 'Bearer ' + this.auth.currentUserValue.token
+        }
       }
-    });
+    );
   }
 
   getUserByEmail(email:string):Observable<User>{
     return this.http.get<User>(this.url+`/get-user-by-email/`+email,{
       headers: {
-        'Authorization': 'Bearer ' + this.auth.currentUserValue.token
+        'Authorization': 'bearer ' + this.auth.currentUserValue.token
       }
     });
   }

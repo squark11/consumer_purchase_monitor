@@ -20,7 +20,7 @@
         <td>{{ report.productInfo.id }}</td>
         <td>{{ report.reason }}</td>
         <td>{{ report.status }}</td>
-        <td>{{ report.createdAt }}</td>
+        <td>{{ report.createdAt | date: 'MM/dd/yyyy' }}</td>
         <td>{{ report.productInfo.name }}</td>
         <td>{{ report.productInfo.category }}</td>
         <td>

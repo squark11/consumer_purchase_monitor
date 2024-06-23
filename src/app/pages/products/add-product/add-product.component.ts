@@ -2,6 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Output, TemplateRef, inject } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductItem, ProductResponse } from 'src/app/models/product-models';
+import { AlertService } from 'src/app/services/alert.service';
 
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -14,7 +15,7 @@ export class AddProductComponent {
 
   @Output() appAddProduct: EventEmitter<any> = new EventEmitter();
 
-constructor(private productService:ProductsService){}
+constructor(private productService:ProductsService, private alerts:AlertService){}
 
   product:ProductItem = {
     name: '',
@@ -28,9 +29,11 @@ constructor(private productService:ProductsService){}
       result => {
         this.appAddProduct.emit()
         console.log('Product added successfully:', result);
+        this.alerts.success('Product added successfully');
       },
       error => {
         console.error('Error adding product:', error);
+        this.alerts.error('Error adding product')
       }
     );
   }
