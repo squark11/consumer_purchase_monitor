@@ -13,7 +13,7 @@
                 <span>{{ comment.likesCount }} likes</span>
               </div>
               <div class="dropdown d-flex gap-2" ngbDropdown >
-                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" ngbDropdownToggle type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <button *ngIf="!comment.repliedToUserName || comment.hasUserWritten" class="btn btn-sm btn-outline-secondary dropdown-toggle" ngbDropdownToggle type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                   More
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu aria-labelledby="dropdownMenuButton">
